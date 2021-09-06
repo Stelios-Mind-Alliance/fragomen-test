@@ -128,7 +128,7 @@ export class AdminComponent implements OnInit {
         if (user) {
           // UPDATING LOCAL ARRAY
           const index = this.users.findIndex(
-            existingCustomer => existingCustomer.id === user.id
+            existingUser => existingUser.id === user.id
           );
           this.users[index] = new User(user);
           this.subject$.next(this.users);
@@ -139,7 +139,7 @@ export class AdminComponent implements OnInit {
   deleteUser(user) {
     // UPDATING LOCAL ARRAY
     this.users.splice(
-      this.users.findIndex(existingCustomer => existingCustomer.id === user.id),
+      this.users.findIndex(existingUser => existingUser.id === user.id),
       1
     );
     this.subject$.next(this.users);

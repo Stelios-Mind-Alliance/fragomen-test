@@ -129,7 +129,7 @@ export class SuperAdminComponent implements OnInit, AfterViewInit, OnDestroy {
         if (admin) {
           // UPDATING LOCAL ARRAY
           const index = this.admins.findIndex(
-            existingCustomer => existingCustomer.id === admin.id
+            existingUser => existingUser.id === admin.id
           );
           this.admins[index] = new Admin(admin);
           this.subject$.next(this.admins);
@@ -140,9 +140,7 @@ export class SuperAdminComponent implements OnInit, AfterViewInit, OnDestroy {
   deleteAdmin(admin) {
     // UPDATING LOCAL ARRAY
     this.admins.splice(
-      this.admins.findIndex(
-        existingCustomer => existingCustomer.id === admin.id
-      ),
+      this.admins.findIndex(existingUser => existingUser.id === admin.id),
       1
     );
     this.subject$.next(this.admins);
