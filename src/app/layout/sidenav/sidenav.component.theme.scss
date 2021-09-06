@@ -1,0 +1,12 @@
+iams-sidenav {
+  color: $sidenav-color;
+
+  .sidenav {
+    background: $background-image;
+    background-position: bottom;
+    transition-property: width, box-shadow;
+    transition-duration: $swift-ease-out-duration;
+    transition-timing-function: $swift-ease-out-timing-function;
+    box-shadow: $sidenav-box-shadow;
+  }
+}

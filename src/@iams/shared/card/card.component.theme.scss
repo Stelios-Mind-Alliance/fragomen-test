@@ -1,0 +1,14 @@
+.iams-card {
+  background: $theme-card;
+  color: $theme-text;
+
+  @include mat-elevation($elevation);
+
+  .iams-card-header-subheading {
+    color: $theme-secondary-text;
+  }
+
+  .iams-card-actions {
+    border-top: 1px solid $theme-divider;
+  }
+}

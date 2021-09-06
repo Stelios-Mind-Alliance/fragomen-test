@@ -1,0 +1,110 @@
+<iams-page [fxLayoutGap]="gap" class="dashboard" fxLayout="column">
+  <!-- CHARTS OVERVIEW START -->
+  <div
+    [fxLayoutGap]="gap"
+    fxFlex="noshrink"
+    fxLayout="column"
+    fxLayout.gt-lg="row"
+  >
+    <div fxLayout="column" [fxLayoutGap]="gap" [fxFlex]="col(2)">
+      <iams-advanced-pie-chart-widget
+        class="route-animations-elements"
+        [data]="advancedPieChartData$ | async"
+        [options]="advancedPieChartOptions"
+      ></iams-advanced-pie-chart-widget>
+    </div>
+  </div>
+  <!-- CHARTS OVERVIEW END -->
+
+  <!-- AUDIENCE OVERVIEW START -->
+  <div
+    fxLayout="column"
+    [fxLayoutGap]="gap"
+    [fxFlex]="col(2)"
+    fxLayout.gt-sm="row"
+  >
+    <div fxFlex="grow">
+      <iams-audience-overview-widget
+        class="route-animations-elements"
+        [options]="audienceOverviewOptions"
+      ></iams-audience-overview-widget>
+    </div>
+  </div>
+  <!-- AUDIENCE OVERVIEW END -->
+
+  <!-- FIRST ROW -->
+  <div
+    fxFlex="noshrink"
+    fxLayout="column"
+    [fxLayoutGap]="gap"
+    fxLayout.gt-lg="row"
+  >
+    <div
+      fxLayout="column"
+      [fxLayoutGap]="gap"
+      [fxFlex]="col(2)"
+      fxLayout.gt-sm="row"
+    >
+      <div fxFlex="auto" [fxFlex.gt-sm]="col(4)">
+        <iams-bar-chart-widget
+          class="widget route-animations-elements"
+          [data]="alertsData$ | async"
+          [options]="totalAlertsOptions"
+        ></iams-bar-chart-widget>
+      </div>
+
+      <div fxFlex="auto" [fxFlex.gt-sm]="col(4)">
+        <iams-line-chart-widget
+          class="widget route-animations-elements"
+          [data]="visitsData$ | async"
+          [options]="totalVisitsOptions"
+        ></iams-line-chart-widget>
+      </div>
+    </div>
+  </div>
+  <!-- END FIRST ROW -->
+
+  <div
+    fxFlex="noshrink"
+    fxLayout="column"
+    [fxLayoutGap]="gap"
+    fxLayout.gt-lg="row"
+  >
+    <div
+      fxLayout="column"
+      [fxLayoutGap]="gap"
+      [fxFlex]="col(2)"
+      fxLayout.gt-sm="row"
+    >
+      <div
+        [fxFlex.gt-sm]="col(2)"
+        [fxLayoutGap]="gap"
+        fxFlex="grow"
+        fxLayout="column"
+      >
+        <iams-alerts-summary-widget
+          [data]="alertsSummaryData$ | async"
+          [options]="alertsSummaryOptions"
+          class="fullheight"
+        ></iams-alerts-summary-widget>
+
+        <iams-quick-info-widget
+          class="route-animations-elements"
+          fxFlex="grow"
+          value="234"
+          label="Users"
+          [background]="'#009688'"
+          color="white"
+          icon="people"
+        ></iams-quick-info-widget>
+      </div>
+
+      <iams-realtime-users-widget
+        [data$]="realtimeUsersData$"
+        [fxFlex.gt-sm]="col(2)"
+        [pages$]="realtimeUsersPages$"
+        fxFlex="grow"
+      ></iams-realtime-users-widget>
+    </div>
+  </div>
+</iams-page>

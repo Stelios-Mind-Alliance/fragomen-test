@@ -1,0 +1,82 @@
+<div
+  (iamsClickOutside)="onClickOutside()"
+  class="toolbar-notifications"
+  fxFlex="grow"
+  fxLayout="row"
+  fxLayoutAlign="start center"
+>
+  <button
+    (click)="toggleDropdown()"
+    [class.open]="isOpen"
+    class="button"
+    fxFlex="grow"
+    mat-button
+    type="button"
+  >
+    <mat-icon
+      [matBadgeHidden]="notifications.length === 0"
+      [matBadge]="notifications.length"
+      class="icon"
+    >
+      notifications_active
+    </mat-icon>
+  </button>
+
+  <div [class.open]="isOpen" class="dropdown">
+    <iams-card>
+      <!-- <iams-card-header class="dropdown-header" fxLayoutAlign="center">
+        <iams-card-header-heading> Notifications </iams-card-header-heading>
+        <iams-card-header-subheading>
+          You have {{ notifications.length }} new notifications.
+        </iams-card-header-subheading>
+      </iams-card-header> -->
+
+      <iams-card-content class="dropdown-card-content">
+        <iams-scrollbar class="dropdown-content">
+          <div fxLayout="column">
+            <ng-container
+              *ngFor="let notification of notifications; let last = last"
+            >
+              <div
+                (click)="markAsRead(notification)"
+                [@listFade]
+                [class.read]="notification.read"
+                [ngClass]="notification.colorClass"
+                class="notification"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+                matRipple
+              >
+                <mat-icon class="icon">{{ notification.icon }}</mat-icon>
+                <div class="label" fxLayout="column">
+                  <div class="name">{{ notification.name }}</div>
+                  <div class="time">{{ notification.time }}</div>
+                </div>
+                <span fxFlex></span>
+                <button
+                  (click)="dismiss(notification, $event)"
+                  mat-icon-button
+                  type="button"
+                >
+                  <mat-icon class="close">close</mat-icon>
+                </button>
+              </div>
+              <mat-divider *ngIf="!last"></mat-divider>
+            </ng-container>
+          </div>
+          <div *ngIf="notifications.length === 0" [@listFade] class="empty">
+            All fine! No notifications right now.
+          </div>
+        </iams-scrollbar>
+      </iams-card-content>
+
+      <iams-card-actions
+        (click)="markAllAsRead()"
+        class="dropdown-footer"
+        matRipple
+      >
+        Mark all as read
+      </iams-card-actions>
+    </iams-card>
+  </div>
+</div>

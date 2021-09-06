@@ -1,0 +1,24 @@
+<iams-form-create></iams-form-create>
+<mat-accordion multi="true" *ngIf="forms.length > 0">
+  <mat-expansion-panel *ngFor="let form of forms">
+    <mat-expansion-panel-header>
+      {{ form.description }}
+    </mat-expansion-panel-header>
+    <p>{{ form.state }}</p>
+    <p>{{ form.impact }}</p>
+    <p>{{ form.formStatus }}</p>
+    <p>{{ form.announcementDesc }}</p>
+    <p>{{ form.announcementUrl }}</p>
+    <p>{{ form.effectiveDate }}</p>
+    <p>{{ form.alertRequest }}</p>
+    <p>{{ form.govAgency }}</p>
+    <p>{{ form.alertRef }}</p>
+    <mat-action-row>
+      <button mat-button color="primary">EDIT</button>
+      <button mat-button color="warn">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="info-text mat-body-1" *ngIf="forms.length <= 0">
+  No Change Notification Forms added yet!
+</p>

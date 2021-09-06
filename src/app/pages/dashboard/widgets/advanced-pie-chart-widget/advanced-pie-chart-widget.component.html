@@ -1,0 +1,58 @@
+<iams-card>
+  <iams-card-header>
+    <iams-card-header-heading>{{ options?.title }}</iams-card-header-heading>
+    <iams-card-header-subheading *ngIf="options?.subTitle">{{
+      options?.subTitle
+    }}</iams-card-header-subheading>
+
+    <iams-card-header-actions>
+      <button mat-icon-button (click)="reload()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </iams-card-header-actions>
+  </iams-card-header>
+
+  <iams-card-content>
+    <div class="content" fxLayout="row">
+      <div class="chart" fxFlex="150px">
+        <canvas
+          *ngIf="data"
+          [datasets]="data.datasets"
+          [labels]="data.labels"
+          [legend]="false"
+          [options]="chartOptions"
+          baseChart
+          chartType="doughnut"
+          height="150"
+          width="150"
+        >
+        </canvas>
+      </div>
+      <div class="legend" fxLayout="column" fxFlex="0 1 100%">
+        <div class="total-value" fxFlex="none">{{ total }}</div>
+        <div class="total-label" fxFlex="none">Total Alerts</div>
+
+        <iams-scrollbar class="legend-items">
+          <div fxLayout="row" fxLayoutAlign="space-between stretch">
+            <div
+              class="legend-item"
+              *ngFor="let value of legendData; let i = index"
+              fxLayout="row"
+            >
+              <div
+                class="item-color"
+                [style.background-color]="getLegendBackground(i)"
+              ></div>
+              <div fxLayout="column">
+                <div class="item-value">{{ value }}</div>
+                <div class="item-label">{{ getLegendLabel(i) }}</div>
+                <div class="item-percent">{{ getPercentageValue(value) }}</div>
+              </div>
+            </div>
+          </div>
+        </iams-scrollbar>
+        <div class="fade-out-overlay"></div>
+      </div>
+    </div>
+  </iams-card-content>
+</iams-card>

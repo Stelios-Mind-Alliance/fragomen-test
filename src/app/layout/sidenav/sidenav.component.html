@@ -1,0 +1,13 @@
+<div class="sidenav" fxLayout="column">
+  <div [routerLink]="['/']" class="sidenav-logo">
+    <img src="../../../assets/Fragomen_IAMS_Logo_Opt6.svg" />
+  </div>
+
+  <iams-scrollbar class="sidenav-items" fxFlex="auto">
+    <iams-sidenav-item
+      *ngFor="let item of items$ | async"
+      [item]="item"
+      [level]="0"
+    ></iams-sidenav-item>
+  </iams-scrollbar>
+</div>

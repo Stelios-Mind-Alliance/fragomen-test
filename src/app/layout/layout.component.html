@@ -1,0 +1,70 @@
+<iams-loading-indicator></iams-loading-indicator>
+<iams-backdrop #backdrop="iamsBackdrop"></iams-backdrop>
+
+<div class="container" fxLayout="column">
+  <ng-container *ngIf="(toolbarPosition$ | async) === 'above-fixed'">
+    <ng-container *ngTemplateOutlet="toolbar"></ng-container>
+  </ng-container>
+
+  <mat-sidenav-container autosize fxFlex>
+    <!-- SIDENAV -->
+    <mat-sidenav
+      (closedStart)="closeSidenav()"
+      (openedStart)="openSidenav()"
+      [mode]="sidenavMode$ | async"
+      [opened]="sidenavOpen$ | async"
+      *ngIf="sideNavigation$ | async"
+      class="iams-collapsable-sidenav"
+    >
+      <iams-sidenav
+        [collapsed]="sidenavCollapsed$ | async"
+        [expanded]="sidenavExpanded$ | async"
+      ></iams-sidenav>
+    </mat-sidenav>
+    <!-- END SIDENAV -->
+
+    <mat-sidenav-content class="content-container" fxLayout="column">
+      <ng-container *ngIf="(toolbarPosition$ | async) === 'fixed'">
+        <ng-container *ngTemplateOutlet="toolbar"></ng-container>
+      </ng-container>
+
+      <!-- CONTENT -->
+      <div
+        [class.scroll-disabled]="scrollDisabled$ | async"
+        cdkScrollable
+        class="content"
+        fxFlex="auto"
+        fxLayout="column"
+      >
+        <ng-container *ngIf="(toolbarPosition$ | async) === 'static'">
+          <ng-container *ngTemplateOutlet="toolbar"></ng-container>
+        </ng-container>
+
+        <div class="content-inner" fxFlex="auto">
+          <router-outlet></router-outlet>
+        </div>
+
+        <ng-container *ngIf="(footerPosition$ | async) === 'static'">
+          <ng-container *ngTemplateOutlet="footer"></ng-container>
+        </ng-container>
+      </div>
+      <!-- END CONTENT -->
+
+      <ng-container *ngIf="(footerPosition$ | async) === 'fixed'">
+        <ng-container *ngTemplateOutlet="footer"></ng-container>
+      </ng-container>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <ng-container *ngIf="(footerPosition$ | async) === 'above-fixed'">
+    <ng-container *ngTemplateOutlet="footer"></ng-container>
+  </ng-container>
+</div>
+
+<ng-template #toolbar>
+  <iams-toolbar fxFlex="none"></iams-toolbar>
+</ng-template>
+
+<ng-template #footer>
+  <iams-footer fxFlex="none"></iams-footer>
+</ng-template>

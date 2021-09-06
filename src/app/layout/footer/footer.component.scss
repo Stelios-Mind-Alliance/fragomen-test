@@ -1,0 +1,19 @@
+@import 'var';
+
+:host {
+  bottom: 0;
+  display: block;
+}
+
+.footer {
+  height: $footer-height;
+  position: relative;
+  z-index: $footer-z-index;
+  padding-left: $spacing;
+  padding-right: $spacing;
+
+  .name {
+    letter-spacing: 0;
+    margin: 0 auto;
+  }
+}

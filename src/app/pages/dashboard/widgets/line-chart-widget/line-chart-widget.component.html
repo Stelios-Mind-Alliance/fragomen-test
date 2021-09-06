@@ -1,0 +1,39 @@
+<iams-card
+  [style.background]="options.background"
+  [style.color]="options.color"
+>
+  <iams-card-header class="header">
+    <iams-card-header-heading [style.color]="options.color">{{
+      options.title
+    }}</iams-card-header-heading>
+    <iams-card-header-subheading
+      [style.color]="options.color"
+      class="subheading"
+    >
+      <mat-icon *ngIf="options.gain >= 0">arrow_upward</mat-icon>
+      <mat-icon *ngIf="options.gain < 0">arrow_downward</mat-icon>
+      {{ options.gain }}% {{ options.subTitle }}
+    </iams-card-header-subheading>
+
+    <iams-card-header-actions>
+      <button (click)="reload()" mat-icon-button>
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </iams-card-header-actions>
+  </iams-card-header>
+
+  <iams-card-content class="card-content">
+    <canvas
+      *ngIf="data"
+      [datasets]="data.datasets"
+      [labels]="data.labels"
+      [legend]="false"
+      [options]="chartOptions"
+      baseChart
+      chartType="line"
+    >
+    </canvas>
+  </iams-card-content>
+
+  <iams-loading-overlay [isLoading]="isLoading"></iams-loading-overlay>
+</iams-card>

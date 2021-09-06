@@ -1,0 +1,50 @@
+<iams-card>
+  <iams-card-header>
+    <iams-card-header-heading>
+      {{ options.title }}
+    </iams-card-header-heading>
+    <iams-card-header-subheading>
+      {{ options.subTitle }}
+    </iams-card-header-subheading>
+
+    <iams-card-header-actions>
+      <button mat-icon-button (click)="reload()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </iams-card-header-actions>
+  </iams-card-header>
+
+  <iams-card-content class="card-content">
+    <div class="sections" fxLayout="row" fxLayoutAlign="start center">
+      <div class="section" fxFlex="grow">
+        <div class="label">Monthly Alerts</div>
+        <div class="value" fxLayout="row" fxLayoutAlign="start center">
+          <span>473</span>
+          <mat-icon class="indicator success">trending_up</mat-icon>
+        </div>
+      </div>
+      <div class="section" fxFlex="grow">
+        <div class="label">Alerts Today</div>
+        <div class="value" fxLayout="row" fxLayoutAlign="start center">
+          <span>46</span>
+          <mat-icon class="indicator warn">trending_down</mat-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <canvas
+        *ngIf="data"
+        [datasets]="data.datasets"
+        [labels]="data.labels"
+        [legend]="false"
+        [options]="chartOptions"
+        baseChart
+        chartType="line"
+      >
+      </canvas>
+    </div>
+  </iams-card-content>
+
+  <iams-loading-overlay [isLoading]="isLoading"></iams-loading-overlay>
+</iams-card>

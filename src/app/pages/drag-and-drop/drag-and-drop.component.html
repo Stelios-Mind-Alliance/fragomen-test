@@ -1,0 +1,59 @@
+<iams-page-layout mode="card">
+  <iams-page-layout-content
+    cdkDropListGroup
+    fxLayout="row"
+    fxLayout.lt-sm="column"
+    fxLayoutAlign="start start"
+    fxLayoutGap="24px"
+  >
+    <iams-card [@fadeInUp] class="basic-forms" fxFlex="auto">
+      <iams-card-header>
+        <iams-card-header-heading>To-Do Tasks</iams-card-header-heading>
+        <iams-card-header-subheading
+          >Simply Drag & Drop items in your order</iams-card-header-subheading
+        >
+      </iams-card-header>
+      <iams-card-content
+        (cdkDropListDropped)="drop($event)"
+        [cdkDropListData]="todo"
+        cdkDropList
+      >
+        <div
+          *ngFor="let task of todo"
+          cdkDrag
+          class="task card"
+          fxLayout="column"
+          fxLayoutAlign="center start"
+        >
+          <div class="heading">{{ task.name }}</div>
+          <div class="caption secondary-text">{{ task.due }}</div>
+        </div>
+      </iams-card-content>
+    </iams-card>
+
+    <iams-card [@fadeInUp] class="basic-forms" fxFlex="auto">
+      <iams-card-header>
+        <iams-card-header-heading>Done Tasks</iams-card-header-heading>
+        <iams-card-header-subheading
+          >Drag between lists and inside lists</iams-card-header-subheading
+        >
+      </iams-card-header>
+      <iams-card-content
+        (cdkDropListDropped)="drop($event)"
+        [cdkDropListData]="done"
+        cdkDropList
+      >
+        <div
+          *ngFor="let task of done"
+          cdkDrag
+          class="task card"
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+        >
+          <div>{{ task.name }}</div>
+          <mat-icon>done</mat-icon>
+        </div>
+      </iams-card-content>
+    </iams-card>
+  </iams-page-layout-content>
+</iams-page-layout>

@@ -1,0 +1,253 @@
+<mat-card>
+  <div class="form-header">
+    <button mat-raised-button color="basic" type="button">
+      <mat-icon>close</mat-icon>Exit
+    </button>
+    <mat-card-title>Change Notification Form</mat-card-title>
+    <button mat-raised-button color="primary" type="button">
+      <mat-icon>save</mat-icon>Save
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit"
+      (click)="onAddForm(postForm)"
+    >
+      <mat-icon>send</mat-icon>Submit
+    </button>
+  </div>
+
+  <form (submit)="onAddForm(postForm)" #postForm="ngForm">
+    <!-- DESCRIPTION START -->
+    <mat-form-field>
+      <mat-label>Concisely describe the change</mat-label>
+      <input
+        matInput
+        type="text"
+        name="description"
+        ngModel
+        required
+        minlength="3"
+        placeholder="Describe how it was before and what is the exact change"
+        #description="ngModel"
+      />
+      <mat-error *ngIf="description.invalid"
+        >Please enter a valid description.</mat-error
+      >
+    </mat-form-field>
+    <!-- DESCRIPTION END -->
+
+    <!-- LOCATION START -->
+    <!-- <mat-form-field>
+      <mat-label>Select a State</mat-label>
+      <input
+        matInput
+        [matAutocomplete]="auto"
+        name="stateCtrl"
+        ngModel
+        #state
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let state of filteredStates | async"
+          [value]="state.name"
+        >
+          <img
+            style="vertical-align: middle; margin-right: 4px"
+            src="{{ state.flag }}"
+            height="16"
+          />
+          <span>{{ state.name }}</span> |
+        </mat-option>
+      </mat-autocomplete>
+      <button
+        *ngIf="stateCtrl.value"
+        type="button"
+        mat-icon-button
+        (click)="stateCtrl.reset()"
+        matSuffix
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <button *ngIf="!stateCtrl.value" type="button" mat-icon-button matSuffix>
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+    </mat-form-field> -->
+    <mat-form-field>
+      <mat-label>Select country of interest</mat-label>
+      <textarea
+        matInput
+        name="state"
+        ngModel
+        required
+        placeholder="Search & Pick location"
+        #state="ngModel"
+      ></textarea>
+      <mat-error *ngIf="state.invalid">Please enter a valid state.</mat-error>
+    </mat-form-field>
+    <!-- LOCATION END -->
+
+    <!-- IMPTACT START -->
+    <mat-form-field>
+      <mat-label>Impact on employers</mat-label>
+      <textarea
+        matInput
+        rows="4"
+        name="impact"
+        ngModel
+        required
+        placeholder="Explain any implications"
+        #impact="ngModel"
+      ></textarea>
+      <mat-error *ngIf="impact.invalid">Please enter impact.</mat-error>
+    </mat-form-field>
+    <!-- IMPACT END -->
+
+    <!-- STATUS START -->
+    <mat-label>Is the change public information? </mat-label>
+    <mat-radio-group ngModel name="formStatus" required #formStatus>
+      <mat-radio-button value="yes">Yes</mat-radio-button>
+      <mat-radio-button value="no">No</mat-radio-button>
+    </mat-radio-group>
+    <!-- STATUS END -->
+
+    <!-- ANNOUNCEMENT START -->
+    <mat-form-field>
+      <mat-label>How was it announced?</mat-label>
+      <textarea
+        matInput
+        rows="4"
+        name="announcementDesc"
+        ngModel
+        required
+        placeholder="Describe shortly"
+        #announcementDesc="ngModel"
+      ></textarea>
+      <mat-error *ngIf="announcementDesc.invalid"
+        >Please enter how it was announced.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Add URL</mat-label>
+      <input
+        matInput
+        rows="4"
+        name="announcementUrl"
+        ngModel
+        #announcementUrl="ngModel"
+      />
+      <mat-icon matPrefix>link</mat-icon>
+      <button type="button" mat-icon-button matSuffix>
+        <mat-icon matPrefix>add</mat-icon>
+      </button>
+    </mat-form-field>
+    <!-- ANNOUNCEMENT END -->
+
+    <!-- EFFECTIVE DATE START -->
+    <div class="effective-date">
+      <mat-label>Choose the effective date</mat-label>
+      <div class="effective-date__from">
+        <mat-label>From</mat-label>
+        <mat-form-field>
+          <input
+            (click)="formDatepickerRef.open()"
+            (focus)="formDatepickerRef.open()"
+            [matDatepicker]="formDatepickerRef"
+            name="effectiveDate"
+            ngModel
+            #effectiveDate
+            matInput
+            readonly
+          />
+          <mat-datepicker-toggle
+            [for]="formDatepickerRef"
+            matSuffix
+          ></mat-datepicker-toggle>
+          <mat-datepicker #formDatepickerRef></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <!-- EFFECTIVE DATE END -->
+
+    <!--  ALERT REQUEST START -->
+    <mat-label>Alert Requested?</mat-label>
+    <mat-radio-group ngModel name="alertRequest" required #alertRequest>
+      <mat-radio-button value="alert-requested"
+        >Alert Requested</mat-radio-button
+      >
+      <mat-radio-button value="alert-not-requested"
+        >No - Alert Not Required</mat-radio-button
+      >
+      <mat-radio-button value="news-brief-requested"
+        >News Brief Requested</mat-radio-button
+      >
+      <mat-radio-button value="tbd">TBD</mat-radio-button>
+    </mat-radio-group>
+    <!-- ALERT REQUEST END -->
+
+    <!-- MORE OPTIONS START -->
+    <mat-expansion-panel
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        Show more options
+      </mat-expansion-panel-header>
+      <!-- MORE OPTIONS - GOV AGENCY START -->
+      <ng-template matExpansionPanelContent>
+        <mat-form-field class="more-options">
+          <mat-label>What government agency made the change</mat-label>
+          <input matInput name="govAgency" ngModel #govAgency="ngModel" />
+          <mat-icon matPrefix>edit</mat-icon>
+          <button type="button" mat-icon-button matSuffix>
+            <mat-icon matPrefix>add</mat-icon>
+          </button>
+        </mat-form-field>
+        <!-- MORE OPTIONS - GOV AGENCY END -->
+
+        <!-- MORE OPTIONS - ALERT REFERENCE START -->
+        <mat-form-field class="more-options">
+          <mat-label>Past Alert Reference</mat-label>
+          <input matInput name="alertRef" ngModel #alertRef="ngModel" />
+          <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
+        <!-- MORE OPTIONS - ALERT REFERENCE END -->
+
+        <!-- MORE OPTIONS - FILE UPLOAD START -->
+        <div>
+          <mat-label style="display: block">Attachment</mat-label>
+          <mat-label>Upload:</mat-label>
+          <button mat-button color="primary" (click)="onFileUpload()">
+            <mat-icon>file_upload</mat-icon>
+          </button>
+          <input
+            type="file"
+            #fileUpload
+            id="fileUpload"
+            name="fileUpload"
+            multiple="multiple"
+            accept="image/*"
+            style="display: none"
+          />
+          <ul>
+            <li *ngFor="let file of files">
+              <mat-progress-bar [value]="file.progress"></mat-progress-bar>
+              <span id="file-label"> </span>
+            </li>
+          </ul>
+        </div>
+        <!-- MORE OPTIONS - FILE UPLOAD END -->
+
+        <!-- MORE OPTIONS - TARGET START -->
+        <iams-multi-select-dropdown
+          [list]="list"
+          (shareCheckedList)="shareCheckedList($event)"
+          (shareIndividualCheckedList)="shareIndividualCheckedList($event)"
+        >
+        </iams-multi-select-dropdown>
+        <!-- MORE OPTIONS - TARGET START -->
+      </ng-template>
+    </mat-expansion-panel>
+    <!-- MORE OPTIONS END -->
+  </form>
+</mat-card>

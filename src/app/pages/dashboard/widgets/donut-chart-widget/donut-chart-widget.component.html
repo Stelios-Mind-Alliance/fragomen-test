@@ -1,0 +1,54 @@
+<iams-card fxFlex="auto">
+  <iams-card-header>
+    <iams-card-header-heading>
+      {{ options.title }}
+    </iams-card-header-heading>
+    <iams-card-header-subheading>
+      {{ options.subTitle }}
+    </iams-card-header-subheading>
+
+    <iams-card-header-actions>
+      <button mat-icon-button (click)="reload()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </iams-card-header-actions>
+  </iams-card-header>
+
+  <iams-card-content>
+    <div class="content">
+      <canvas
+        *ngIf="data"
+        [datasets]="data.datasets"
+        [labels]="data.labels"
+        [legend]="false"
+        [options]="chartOptions"
+        baseChart
+        chartType="pie"
+      >
+      </canvas>
+    </div>
+  </iams-card-content>
+
+  <iams-card-actions class="footer" fxLayout="row" fxLayoutAlign="start center">
+    <div
+      class="section"
+      fxFlex="grow"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+    >
+      <div class="value">1096</div>
+      <div class="label">Total alerts</div>
+    </div>
+    <div
+      class="section"
+      fxFlex="grow"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+    >
+      <div class="value">598</div>
+      <div class="label">Top Categories</div>
+    </div>
+  </iams-card-actions>
+
+  <iams-loading-overlay [isLoading]="isLoading"></iams-loading-overlay>
+</iams-card>

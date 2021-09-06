@@ -1,0 +1,45 @@
+@import 'var';
+
+:host {
+  top: 0;
+  z-index: $toolbar-z-index;
+}
+
+.toolbar {
+  padding-right: 0;
+  height: $toolbar-height;
+  padding-left: $spacing;
+  max-width: 100%;
+
+  // .toolbar-btn {
+  //   border-left-width: 1px;
+  //   border-left-style: solid;
+  //   display: flex;
+  // }
+
+  .toolbar-create-btn {
+    display: flex;
+    cursor: pointer;
+  }
+
+  .toolbar-settings-btn {
+    display: flex;
+    cursor: pointer;
+  }
+
+  .toolbar-logo {
+    cursor: pointer;
+    outline: none;
+    margin-bottom: -5px;
+    margin-left: $spacing;
+    margin-right: $spacing;
+
+    svg {
+      height: 35px;
+    }
+  }
+
+  @include media-xs {
+    padding-left: $spacing/3;
+  }
+}

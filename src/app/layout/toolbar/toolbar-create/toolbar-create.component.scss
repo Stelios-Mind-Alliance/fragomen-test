@@ -1,0 +1,20 @@
+@import 'var';
+
+:host {
+  margin: 0;
+  padding: 0px 40px;
+  height: 100%;
+  flex-direction: row;
+  align-self: center;
+  border-left: 1px solid #e4ebf0;
+}
+
+.toolbar-create {
+  align-self: center;
+
+  .toolbar-create-btn {
+    color: #fff;
+    background-color: #039be5;
+    border-radius: 10px;
+  }
+}
